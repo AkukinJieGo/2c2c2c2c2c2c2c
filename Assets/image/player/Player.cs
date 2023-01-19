@@ -39,20 +39,20 @@ public class Player : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        spawnpoint=new Vector3(-53.09f,21.75f,0f);
         Debug.Log("開始");
         rigid2D = GetComponent<Rigidbody2D>();
         Coll = GetComponent<CapsuleCollider2D>();
         foot = GetComponent<BoxCollider2D>();
         Canvas_Pause.enabled=false;
         Canvas_HUD.enabled=true;
-        this.transform.position=spawnpoint;
+        this.transform.position=spawn.spawnpoint;
     }
     void Update()
     {
         if(!attackanimBoll)
         {
             attackanimTimer+=Time.deltaTime;
+
             if(attackanimTimer>=attackanimcold)
             {
                 anim.SetFloat("attacking",Mathf.Abs(0));
@@ -159,7 +159,7 @@ public class Player : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D col) {
         if(col.gameObject.tag=="Spawnpoint")
         {
-            spawnpoint=col.transform.position;
+            spawn.spawnpoint=col.transform.position;
         }
     }
 }
