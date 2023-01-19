@@ -10,6 +10,7 @@ TagManager:
   - FireBall
   - wall
   - RRR
+  - Spawnpoint
   layers:
   - Default
   - TransparentFX

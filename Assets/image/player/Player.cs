@@ -11,6 +11,10 @@ public class Player : MonoBehaviour
     float attackanimTimer=0f;
     bool attackanimBoll=true;
 
+    //重生點
+    private Vector3 spawnpoint;
+
+
     public Canvas Canvas_Pause;
     public Canvas Canvas_HUD;
     float Pausecold=0.3f;
@@ -35,12 +39,14 @@ public class Player : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        spawnpoint=new Vector3(-53.09f,21.75f,0f);
         Debug.Log("開始");
         rigid2D = GetComponent<Rigidbody2D>();
         Coll = GetComponent<CapsuleCollider2D>();
         foot = GetComponent<BoxCollider2D>();
         Canvas_Pause.enabled=false;
         Canvas_HUD.enabled=true;
+        this.transform.position=spawnpoint;
     }
     void Update()
     {
@@ -140,7 +146,7 @@ public class Player : MonoBehaviour
         if(Input.GetKey(KeyCode.R))
         {
             Debug.Log("重來");
-            SceneManager.LoadScene(1);
+            this.transform.position=spawnpoint;
         }
     }
     void pausetime()
@@ -149,5 +155,11 @@ public class Player : MonoBehaviour
         isPause=true;
         Canvas_Pause.enabled=true;
         Canvas_HUD.enabled=false;
+    }
+    private void OnTriggerEnter2D(Collider2D col) {
+        if(col.gameObject.tag=="Spawnpoint")
+        {
+            spawnpoint=col.transform.position;
+        }
     }
 }
