@@ -146,7 +146,7 @@ public class Player : MonoBehaviour
         if(Input.GetKey(KeyCode.R))
         {
             Debug.Log("重來");
-            this.transform.position=spawnpoint;
+            SceneManager.LoadScene(1);  
         }
     }
     void pausetime()
